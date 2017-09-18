@@ -23,10 +23,7 @@ exports.paths = {
         fontsLibs: [vendorsPath + 'bootstrap/dist/fonts/*.*'],
         jsLibs: [
             vendorsPath + 'angular/angular.min.js',
-            vendorsPath + 'angular-route/angular-route.min.js',
-            vendorsPath + 'angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
-            vendorsPath + 'jquery/dist/jquery.min.js',
-            vendorsPath + 'moment/min/moment.min.js'
+            vendorsPath + 'angular-route/angular-route.min.js'
         ]
     },
 
