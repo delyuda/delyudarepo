@@ -19,7 +19,6 @@ exports.paths = {
         html: app + '**/*.html',
         cssLibs: [
             vendorsPath + 'bootstrap/dist/css/bootstrap.min.css'
-            // vendorsPath + 'bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'
         ],
         fontsLibs: [vendorsPath + 'bootstrap/dist/fonts/*.*'],
         jsLibs: [
@@ -27,7 +26,6 @@ exports.paths = {
             vendorsPath + 'angular-route/angular-route.min.js',
             vendorsPath + 'angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
             vendorsPath + 'jquery/dist/jquery.min.js',
-            // vendorsPath + 'bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
             vendorsPath + 'moment/min/moment.min.js'
         ]
     },
