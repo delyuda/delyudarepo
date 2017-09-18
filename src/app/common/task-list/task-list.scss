@@ -1,0 +1,14 @@
+.priority {
+  font-weight: bold;
+  color: #005500;
+
+  &:hover {
+    color: #005500;
+  }
+}
+
+.task-tag {
+  display: inline-block;
+  margin: 2px;
+  background: #eee;
+}

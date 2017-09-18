@@ -1,0 +1,27 @@
+<h1>Task List</h1>
+
+<table class="table bordered">
+    <tr>
+        <th>Task Name</th>
+        <th>Tags</th>
+        <th>Actual Effort</th>
+        <th>Estimated Effort</th>
+        <th>Due Date</th>
+    </tr>
+    <tr ng-repeat="task in vm.taskList" ng-if="task.obj_status === 'active'">
+        <td>
+            <a ng-href="/#!/task/{{ task.id }}"
+                ng-class="{'priority': task.is_high_priority === true}">
+                {{ task.name }}
+            </a>
+        </td>
+        <td>
+            <span ng-repeat="tag in task.tags || []" class="task-tag">
+                <{{ tag }}>
+            </span>
+        </td>
+        <td>{{ task.estimated_effort }}</td>
+        <td>{{ task.actual_effort }}</td>
+        <td>{{ task.due_date | date : 'medium'}}</td>
+    </tr>
+</table>
