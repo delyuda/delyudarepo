@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Ocean Modeling</title>
+
+    <link rel="stylesheet" type="text/css" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+
+    <script src="../../node_modules/jquery/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="header__title">
+            Ocean Modeling
+        </div>
+    </div>
+    <div class="container main">
+        <div class="tools">
+            <div class="matrix-tools">
+                <div class="matrix-tools__item">
+                    <label for="matrix-horizontal">
+                        По горизонтали:
+                    </label>
+                    <input type="number" id="matrix-horizontal" class="matrix-input" />
+                </div>
+
+                <div class="matrix-tools__item">
+                    <label for="matrix-vertical">
+                        По вертикали:
+                    </label>
+                    <input type="number" id="matrix-vertical" class="matrix-input" />
+                </div>
+
+                <button class="btn btn-default create-matrix">
+                    Создать сетку
+                </button>
+            </div>
+
+            <div class="elems-tools">
+                <button class="btn btn-default add-fish-btn">Рыба</button>
+                <button class="btn btn-default add-piranha-btn">Пиранья</button>
+                <button class="btn btn-default add-seaweed-btn">Водоросль</button>
+            </div>
+
+            <div class="tools__item">
+                <label for="time">
+                    Время моделирования:
+                </label>
+                <input type="text" class="" id="time" />
+            </div>
+
+            <div class="tools__item">
+                <label for="fish-live-period">
+                    Период жизни обычной рыбы:
+                </label>
+                <input type="text" class="" id="fish-live-period" />
+            </div>
+
+            <div class="tools__item">
+                <label for="fish-reproduction-period">
+                    Период размножения обычной рыбы:
+                </label>
+                <input type="text" class="" id="fish-reproduction-period" />
+            </div>
+
+            <div class="tools__item">
+                <label for="piranha-live-period">
+                    Период жизни пираньи:
+                </label>
+                <input type="text" class="" id="piranha-live-period" />
+            </div>
+
+            <div class="tools__item">
+                <label for="piranha-reproduction-period">
+                    Период размножения пираньи:
+                </label>
+                <input type="text" class="" id="piranha-reproduction-period" />
+            </div>
+
+            <div class="tools__item">
+                <label for="piranha-starvation-period">
+                    Период голодной смерти пираньи:
+                </label>
+                <input type="text" class="" id="piranha-starvation-period" />
+            </div>
+
+            <div class="tools__item">
+                <label for="seaweed-amount">
+                    Количество водорослей:
+                </label>
+                <input type="text" class="" id="seaweed-amount" disabled="disabled" />
+            </div>
+
+            <div class="tools__item">
+                <label for="fish-amount">
+                    Количество рыб:
+                </label>
+                <input type="text" class="" id="fish-amount" disabled="disabled" />
+            </div>
+
+            <div class="tools__item">
+                <label for="piranha-amount">
+                    Количество пираний:
+                </label>
+                <input type="text" class="" id="piranha-amount" disabled="disabled" />
+            </div>
+
+            <div class="tools__item">
+                <button class="btn btn-default next-day-btn">Следующий день</button>
+            </div>
+        </div>
+
+        <div class="matrix"></div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/models/fish-model.js"></script>
+    <script src="js/models/piranha-model.js"></script>
+    <script src="js/models/seaweed-model.js"></script>
+    <script src="js/views/matrix-view.js"></script>
+    <script src="js/utils/mediator.js"></script>
+    <script src="js/managers/ocean-manager.js"></script>
+    <script src="js/init.js"></script>
+</body>
+</html>
