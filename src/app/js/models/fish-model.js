@@ -14,6 +14,7 @@
         this._nextDayEvent = options.nextDayEvent;
         this._moveEvent = options.moveElemEvent;
         this._createEvent = options.createElemEvent;
+        this._removeEvent = options.removeElemEvent;
 
         this._aroundState = [
             [0,0,0],
@@ -35,14 +36,29 @@
         this._movePriorityState = 0;
 
         this._styleClass = "fish-cell";
+        this._elemName = "fish";
         this._stateIndex = 2;
+
+        this._time = 0;
+        this._liveTime = 0;
+        this._reproductionTime = 0;
 
         this.initListeners();
     }
 
+    var self = {};
+
     FishModel.prototype = {
         initListeners: function () {
             utils.mediator.subscribe(this._nextDayEvent, this.nextDay.bind(this));
+            for (var key in this) {
+                self[key] = this[key];
+            }
+        },
+
+        removeListeners: function () {
+            console.log('remove listeners');
+            utils.mediator.unsubscribe(this._nextDayEvent, self.nextDay.bind(this));
         },
 
         setAroundState: function (matrix) {
@@ -56,8 +72,22 @@
             }
         },
 
+        setTimeParams: function (params) {
+            this._liveTime = params.liveTime;
+            this._reproductionTime = params.reproductionTime;
+        },
+
         nextDay: function () {
-            this.move();
+            this._time += 1;
+
+            if (this._time >= this._liveTime) {
+                console.log('if remove');
+                this.remove();
+            } else if (this._time % this._reproductionTime === 0) {
+                this.double();
+            } else {
+                this.move();
+            }
         },
 
         move: function () {
@@ -75,15 +105,14 @@
                 };
 
                 params = {
+                    elemName: this._elemName,
                     currentState: {
                         x: this._state.x,
-                        y: this._state.y,
-                        state: this._stateIndex
+                        y: this._state.y
                     },
                     moveTo: {
                         x: moveTo.x,
-                        y: moveTo.y,
-                        state: this._stateIndex
+                        y: moveTo.y
                     },
                     callback: this.moveResultHandler.bind(this, moveTo)
                     // styleClass: this._styleClass
@@ -142,6 +171,23 @@
         updateMoveState: function () {
             this._movePriorityState = (this._movePriorityState < this._movePriority.length - 1) ?
                 ++this._movePriorityState : 0;
+        },
+
+        remove: function () {
+            console.log('remove fish');
+            var params;
+
+            params = {
+                id: this.id,
+                elemName: this._elemName,
+                state: this._state
+            };
+
+            utils.mediator.publish(this._removeEvent, params);
+        },
+
+        double: function () {
+
         }
     };
 

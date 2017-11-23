@@ -9,7 +9,7 @@
         this.id = "piranha_" + idIndex;
         idIndex += 1;
 
-        this._stateIndex = 3;
+        this._elemName = "piranha";
     }
 
     PiranhaModel.prototype = Object.create(models.FishModel.prototype);

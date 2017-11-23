@@ -20,7 +20,13 @@ var app = {
                 addFishBtn: ".add-fish-btn",
                 addPiranhaBtn: ".add-piranha-btn",
                 addSeaweedBtn: ".add-seaweed-btn",
-                nextDayBtn: ".next-day-btn"
+                nextDayBtn: ".next-day-btn",
+                timeInputs: {
+                    fishLiveInput: "#fish-live-period",
+                    fishReprodInput: "#fish-reproduction-period",
+                    piranhaLiveInput: "#piranha-live-period",
+                    piranhaReprodInput: "#piranha-reproduction-period"
+                }
             },
             events: {
                 nextDayEvent: "nextDayEvent",

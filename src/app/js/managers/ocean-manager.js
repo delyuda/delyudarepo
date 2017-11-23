@@ -30,6 +30,8 @@
             piranha: models.PiranhaModel
         };
 
+        this._isStart = false;
+
         this.initialize();
         this.initEvents();
         this.initListeners();
@@ -54,6 +56,8 @@
             utils.mediator.subscribe(this._matrixClickEvent, this.matrixClickHandler.bind(this));
 
             utils.mediator.subscribe(this.events.moveElemEvent, this.moveElement.bind(this));
+            utils.mediator.subscribe(this.events.createElemEvent, this.createElement.bind(this));
+            utils.mediator.subscribe(this.events.removeElemEvent, this.removeElement.bind(this));
         },
 
         createMatrix: function () {
@@ -121,28 +125,28 @@
                     y: params.y,
                     state: this._elemIndex[this._currentMode]
                 };
-                console.log('this._currentMode',this._currentMode);
-                console.log("elemParams",elemParams);
 
                 this.matrixView.setState(elemParams);
 
                 elemOptions = {
                     nextDayEvent: this.events.nextDayEvent,
                     moveElemEvent: this.events.moveElemEvent,
+                    removeElemEvent: this.events.removeElemEvent,
                     x: params.x,
                     y: params.y
                 };
 
                 elem = new this._elemClass[this._currentMode](elemOptions);
-                console.log('elem.id',elem.id);
 
                 this._elements[this._currentMode][elem.id] = elem;
-                console.log('this._elements',this._elements);
             }
         },
 
         nextDayHandler: function () {
-            this.disableTools();
+            if (!this._isStart) {
+                this.disableTools();
+                this.setElemTime();
+            }
 
             this.setElemStates();
 
@@ -151,6 +155,39 @@
 
         disableTools: function () {
 
+        },
+
+        setElemTime: function () {
+            var fishLiveTime,
+                fishReprodTime,
+                piranhaLiveTime,
+                piranhaReprodTime,
+                fishParams,
+                piranhaParams;
+
+            fishLiveTime = $(this.tools.timeInputs.fishLiveInput).val();
+            fishReprodTime = $(this.tools.timeInputs.fishReprodInput).val();
+            piranhaLiveTime = $(this.tools.timeInputs.piranhaLiveInput).val();
+            piranhaReprodTime = $(this.tools.timeInputs.piranhaReprodInput).val();
+
+
+            for (var key in this._elements.fish) {
+                fishParams = {
+                    liveTime: fishLiveTime,
+                    reproductionTime: fishReprodTime
+                };
+
+                this._elements.fish[key].setTimeParams(fishParams);
+            }
+
+            for (var key in this._elements.piranha) {
+                piranhaParams = {
+                    liveTime: piranhaLiveTime,
+                    reproductionTime: piranhaReprodTime
+                };
+
+                this._elements.piranha[key].setTimeParams(piranhaParams);
+            }
         },
 
         setElemStates: function () {
@@ -173,6 +210,9 @@
             isFree = this.matrixView.isFreeState(params.moveTo);
 
             if (isFree) {
+                params.currentState.state = this._elemIndex[params.elemName];
+                params.moveTo.state = this._elemIndex[params.elemName];
+
                 this.matrixView.removeState(params.currentState);
                 this.matrixView.setState(params.moveTo);
 
@@ -180,6 +220,58 @@
             } else {
                 params.callback("error");
             }
+        },
+
+        createElement: function (params) {
+            var elemParams,
+                elemOptions,
+                elem;
+
+            elemParams = {
+                x: params.x,
+                y: params.y,
+                state: this._elemIndex[params.elemName]
+            };
+
+            this.matrixView.setState(elemParams);
+
+            elemOptions = {
+                nextDayEvent: this.events.nextDayEvent,
+                moveElemEvent: this.events.moveElemEvent,
+                x: params.x,
+                y: params.y
+            };
+
+            elem = new this._elemClass[params.elemName](elemOptions);
+
+            this._elements[params.elemName][elem.id] = elem;
+        },
+
+        removeElement: function (params) {
+            console.log('remove',params);
+            params.state.state = this._elemIndex[params.elemName];
+
+            this.matrixView.removeState(params.state);
+            this._elements[params.elemName][params.id].removeListeners();
+
+            delete this._elements[params.elemName][params.id];
+            console.log('this._elements',this._elements);
+        },
+
+        getElemName: function (index) {
+            var elemName;
+
+            elemName = "";
+
+            for (var key in this._elemIndex) {
+                if (this._elemIndex[key] === index) {
+                    elemName = key;
+
+                    break;
+                }
+            }
+
+            return elemName;
         }
     };
 

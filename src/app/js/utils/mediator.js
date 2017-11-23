@@ -16,7 +16,16 @@
             } else if (event && !callback) {
                 subscribers[event] = [];
             } else {
+                console.log('callback',callback.BoundThis);
+                console.log('subscribers[event]',subscribers[event]);
+                console.log('subscribers[event][0].arguments',subscribers[event][0].BoundThis);
+
+                console.log('=',subscribers[event][0] === callback);
                 subscriberIndex = subscribers[event].indexOf(callback);
+
+
+
+                console.log('subscriberIndex',subscriberIndex);
                 if (subscriberIndex > -1) {
                     subscribers[event].splice(subscriberIndex, 1);
                 }
