@@ -21,18 +21,22 @@ var app = {
                 addPiranhaBtn: ".add-piranha-btn",
                 addSeaweedBtn: ".add-seaweed-btn",
                 nextDayBtn: ".next-day-btn",
+                playBtn: ".play-btn",
                 timeInputs: {
                     fishLiveInput: "#fish-live-period",
                     fishReprodInput: "#fish-reproduction-period",
                     piranhaLiveInput: "#piranha-live-period",
-                    piranhaReprodInput: "#piranha-reproduction-period"
+                    piranhaReprodInput: "#piranha-reproduction-period",
+                    piranhaStarvInput: "#piranha-starvation-period",
+                    timeInput: ".time-input"
                 }
             },
             events: {
                 nextDayEvent: "nextDayEvent",
                 moveElemEvent: "moveEvent",
                 createElemEvent: "createEvent",
-                removeElemEvent: "removeEvent"
+                removeElemEvent: "removeEvent",
+                getElemIdEvent: "getElemId"
             }
         };
 

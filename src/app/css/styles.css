@@ -33,6 +33,48 @@ body {
 
 .elems-tools {
     display: none;
+    margin: 10px 0;
+}
+
+.matrix-tools {
+    border: solid 1px #ddd;
+    margin: 20px 0;
+    padding: 10px;
+}
+
+.matrix-tools__item {
+    margin: 0;
+    padding: 0;
+}
+
+.matrix-tools__item--btn {
+    text-align: center;
+    margin: 10px 0 0;
+}
+
+.matrix-input {
+    width: 50px;
+}
+
+.has-error {
+    border: solid 1px #aa0000;
+}
+
+.time-tools {
+    margin: 20px 0;
+    padding: 10px;
+}
+
+.time-tools__item {
+    margin: 10px 0;
+}
+
+.time-tools__item--modeling {
+    margin: 0 0 30px;
+}
+
+.time-input {
+    width: 60px;
 }
 
 

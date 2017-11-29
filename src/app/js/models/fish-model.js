@@ -37,7 +37,6 @@
 
         this._styleClass = "fish-cell";
         this._elemName = "fish";
-        this._stateIndex = 2;
 
         this._time = 0;
         this._liveTime = 0;
@@ -50,15 +49,14 @@
 
     FishModel.prototype = {
         initListeners: function () {
-            utils.mediator.subscribe(this._nextDayEvent, this.nextDay.bind(this));
+            utils.mediator.subscribe(this._nextDayEvent, this.nextDay.bind(this), this);
             for (var key in this) {
                 self[key] = this[key];
             }
         },
 
         removeListeners: function () {
-            console.log('remove listeners');
-            utils.mediator.unsubscribe(this._nextDayEvent, self.nextDay.bind(this));
+            utils.mediator.unsubscribe(this._nextDayEvent, this.nextDay.bind(this), this);
         },
 
         setAroundState: function (matrix) {
@@ -81,7 +79,6 @@
             this._time += 1;
 
             if (this._time >= this._liveTime) {
-                console.log('if remove');
                 this.remove();
             } else if (this._time % this._reproductionTime === 0) {
                 this.double();
@@ -95,7 +92,7 @@
                 freePosition,
                 moveTo;
 
-            freePosition = this.getFreePosition();
+            freePosition = this.getFreePosition("move");
             this.updateMoveState();
 
             if (freePosition) {
@@ -115,24 +112,26 @@
                         y: moveTo.y
                     },
                     callback: this.moveResultHandler.bind(this, moveTo)
-                    // styleClass: this._styleClass
                 };
-
-                console.log('move params', params);
 
                 utils.mediator.publish(this._moveEvent, params);
             }
         },
 
-        getFreePosition: function () {
+        getFreePosition: function (type) {
             var self,
                 position,
                 posArr;
 
             self = this;
 
-            posArr = this._movePriority.slice(this._movePriorityState)
+            if (type === "double") {
+                posArr = this._movePriority.slice().reverse();
+            } else {
+                posArr = this._movePriority.slice(this._movePriorityState)
                     .concat(this._movePriority.slice(0,this._movePriorityState));
+            }
+
 
             posArr.every(function (item) {
                 if (self._aroundState[item.y][item.x] === 0) {
@@ -168,13 +167,16 @@
             this._state.y = params.y;
         },
 
+        getState: function () {
+            return this._state;
+        },
+
         updateMoveState: function () {
             this._movePriorityState = (this._movePriorityState < this._movePriority.length - 1) ?
                 ++this._movePriorityState : 0;
         },
 
         remove: function () {
-            console.log('remove fish');
             var params;
 
             params = {
@@ -187,7 +189,20 @@
         },
 
         double: function () {
+            var freePosition,
+                params;
 
+            freePosition = this.getFreePosition("double");
+
+            if (freePosition) {
+                params = {
+                    elemName: this._elemName,
+                    x: this._state.x + freePosition.x - 1,
+                    y: this._state.y + freePosition.y - 1
+                };
+
+                utils.mediator.publish(this._createEvent, params);
+            }
         }
     };
 

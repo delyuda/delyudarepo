@@ -1,14 +1,20 @@
 (function (utils) {
     var subscribers = {};
+    var contexts = {};
 
     utils.mediator = {
 
-        subscribe: function (event, callback) {
+        subscribe: function (event, callback, context) {
             subscribers[event] = subscribers[event] || [];
             subscribers[event].push(callback);
+
+            if (context) {
+                contexts[event] = contexts[event] || [];
+                contexts[event][subscribers[event].length - 1] = context;
+            }
         },
 
-        unsubscribe: function (event, callback) {
+        unsubscribe: function (event, callback, context) {
             var subscriberIndex;
 
             if (!event) {
@@ -16,18 +22,27 @@
             } else if (event && !callback) {
                 subscribers[event] = [];
             } else {
-                console.log('callback',callback.BoundThis);
-                console.log('subscribers[event]',subscribers[event]);
-                console.log('subscribers[event][0].arguments',subscribers[event][0].BoundThis);
+                if (context) {
+                    for (var i = 0; i < subscribers[event].length; i++) {
+                        if (subscribers[event][i].name === callback.name &&
+                            subscribers[event][i].toString() === callback.toString() &&
+                            contexts[event][i] === context) {
 
-                console.log('=',subscribers[event][0] === callback);
-                subscriberIndex = subscribers[event].indexOf(callback);
+                            subscriberIndex = i;
 
+                            break;
+                        }
+                    }
+                } else {
+                    subscriberIndex = subscribers[event].indexOf(callback);
+                }
 
-
-                console.log('subscriberIndex',subscriberIndex);
                 if (subscriberIndex > -1) {
                     subscribers[event].splice(subscriberIndex, 1);
+
+                    if (context) {
+                        contexts[event].splice(subscriberIndex, 1);
+                    }
                 }
             }
         },

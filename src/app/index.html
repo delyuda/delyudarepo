@@ -18,97 +18,153 @@
     </div>
     <div class="container main">
         <div class="tools">
-            <div class="matrix-tools">
-                <div class="matrix-tools__item">
+            <div class="matrix-tools col-md-4">
+                <div class="matrix-tools__item col-md-6 form-group">
                     <label for="matrix-horizontal">
                         По горизонтали:
                     </label>
-                    <input type="number" id="matrix-horizontal" class="matrix-input" />
+                    <input type="number" min="1" step="1" id="matrix-horizontal" class="matrix-input" />
                 </div>
 
-                <div class="matrix-tools__item">
+                <div class="matrix-tools__item col-md-6 form-group">
                     <label for="matrix-vertical">
                         По вертикали:
                     </label>
-                    <input type="number" id="matrix-vertical" class="matrix-input" />
+                    <input type="number" min="1" step="1" id="matrix-vertical" class="matrix-input" />
                 </div>
 
-                <button class="btn btn-default create-matrix">
-                    Создать сетку
-                </button>
+                <div class="matrix-tools__item matrix-tools__item--btn col-md-12">
+                    <button class="btn btn-default create-matrix">
+                        Создать сетку
+                    </button>
+                </div>
+
+                <div class="elems-tools col-md-12">
+                    <button class="btn btn-default add-fish-btn">Рыба</button>
+                    <button class="btn btn-default add-piranha-btn">Пиранья</button>
+                    <button class="btn btn-default add-seaweed-btn">Водоросль</button>
+                </div>
             </div>
 
-            <div class="elems-tools">
-                <button class="btn btn-default add-fish-btn">Рыба</button>
-                <button class="btn btn-default add-piranha-btn">Пиранья</button>
-                <button class="btn btn-default add-seaweed-btn">Водоросль</button>
+            <div class="time-tools col-md-8">
+                <div class="row time-tools__item time-tools__item--modeling">
+                    <label for="time" class="col-md-6">
+                        Время моделирования:
+                    </label>
+                    <div class="col-md-6">
+                        <input type="number" id="time" min="1" step="1" class="time-input" />
+                    </div>
+                </div>
+
+                <div class="row time-tools__item">
+                    <label for="fish-live-period" class="col-md-6">
+                        Период жизни обычной рыбы:
+                    </label>
+                    <div class="col-md-6">
+                        <input type="number" min="1" step="1" class="time-input" id="fish-live-period" />
+                    </div>
+                </div>
+
+                <div class="row time-tools__item">
+                    <label for="fish-reproduction-period" class="col-md-6">
+                        Период размножения обычной рыбы:
+                    </label>
+                    <div class="col-md-6">
+                        <input type="number" min="1" step="1" class="time-input" id="fish-reproduction-period" />
+                    </div>
+                </div>
+
+                <div class="row time-tools__item">
+                    <label for="piranha-live-period" class="col-md-6">
+                        Период жизни пираньи:
+                    </label>
+                    <div class="col-md-6">
+                        <input type="number" min="1" step="1" class="time-input" id="piranha-live-period" />
+                    </div>
+                </div>
+
+                <div class="row time-tools__item">
+                    <label for="piranha-reproduction-period" class="col-md-6">
+                        Период размножения пираньи:
+                    </label>
+                    <div class="col-md-6">
+                        <input type="number" min="1" step="1" class="time-input" id="piranha-reproduction-period" />
+                    </div>
+                </div>
+
+                <div class="row time-tools__item">
+                    <label for="piranha-starvation-period" class="col-md-6">
+                        Период голодной смерти пираньи:
+                    </label>
+                    <div class="col-md-6">
+                        <input type="number" min="1" step="1" class="time-input" id="piranha-starvation-period" />
+                    </div>
+                </div>
             </div>
 
-            <div class="tools__item">
-                <label for="time">
-                    Время моделирования:
-                </label>
-                <input type="text" class="" id="time" />
+            <div class="row amount-tools">
+                <div class="col-md-4 amount-tools__item">
+                    <label>
+                        Начальное количество водорослей:
+                    </label>
+                    <span class="" id="initial-seaweed-amount"> -- </span>
+                </div>
+
+                <div class="col-md-4 amount-tools__item">
+                    <label>
+                        Начальное количество рыб:
+                    </label>
+                    <span class="" id="initial-fish-amount"> -- </span>
+                </div>
+
+                <div class="col-md-4 amount-tools__item">
+                    <label>
+                        Начальное количество пираний:
+                    </label>
+                    <span class="" id="initial-piranha-amount"> -- </span>
+                </div>
             </div>
 
-            <div class="tools__item">
-                <label for="fish-live-period">
-                    Период жизни обычной рыбы:
-                </label>
-                <input type="text" class="" id="fish-live-period" />
+            <div class="row amount-tools">
+                <div class="col-md-4 amount-tools__item">
+                    <label>
+                        Количество водорослей:
+                    </label>
+                    <span class="" id="seaweed-amount"> -- </span>
+                </div>
+
+                <div class="col-md-4 amount-tools__item">
+                    <label>
+                        Количество рыб:
+                    </label>
+                    <span class="" id="fish-amount"> -- </span>
+                </div>
+
+                <div class="col-md-4 amount-tools__item">
+                    <label>
+                        Количество пираний:
+                    </label>
+                    <span class="" id="piranha-amount"> -- </span>
+                </div>
             </div>
 
-            <div class="tools__item">
-                <label for="fish-reproduction-period">
-                    Период размножения обычной рыбы:
-                </label>
-                <input type="text" class="" id="fish-reproduction-period" />
+            <div class="row">
+                <div class="col-md-12">
+                    <label>
+                        Время:
+                    </label>
+                    <span class="" id="current-time"> -- </span>
+                </div>
             </div>
 
-            <div class="tools__item">
-                <label for="piranha-live-period">
-                    Период жизни пираньи:
-                </label>
-                <input type="text" class="" id="piranha-live-period" />
-            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="btn btn-default next-day-btn">Следующий день</button>
+                </div>
 
-            <div class="tools__item">
-                <label for="piranha-reproduction-period">
-                    Период размножения пираньи:
-                </label>
-                <input type="text" class="" id="piranha-reproduction-period" />
-            </div>
-
-            <div class="tools__item">
-                <label for="piranha-starvation-period">
-                    Период голодной смерти пираньи:
-                </label>
-                <input type="text" class="" id="piranha-starvation-period" />
-            </div>
-
-            <div class="tools__item">
-                <label for="seaweed-amount">
-                    Количество водорослей:
-                </label>
-                <input type="text" class="" id="seaweed-amount" disabled="disabled" />
-            </div>
-
-            <div class="tools__item">
-                <label for="fish-amount">
-                    Количество рыб:
-                </label>
-                <input type="text" class="" id="fish-amount" disabled="disabled" />
-            </div>
-
-            <div class="tools__item">
-                <label for="piranha-amount">
-                    Количество пираний:
-                </label>
-                <input type="text" class="" id="piranha-amount" disabled="disabled" />
-            </div>
-
-            <div class="tools__item">
-                <button class="btn btn-default next-day-btn">Следующий день</button>
+                <div class="col-md-6">
+                    <button class="btn btn-default play-btn">Старт</button>
+                </div>
             </div>
         </div>
 
@@ -119,6 +175,7 @@
     <script src="js/models/fish-model.js"></script>
     <script src="js/models/piranha-model.js"></script>
     <script src="js/models/seaweed-model.js"></script>
+    <script src="js/models/validation-model.js"></script>
     <script src="js/views/matrix-view.js"></script>
     <script src="js/utils/mediator.js"></script>
     <script src="js/managers/ocean-manager.js"></script>
