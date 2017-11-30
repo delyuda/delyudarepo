@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1 Comments List
+  div.comment-form
+    textarea.comment-form__textarea
+    div
+      button.comment-form__send-btn Add Comment
+  div.comment-list
+    - for (var i = 0; i < comments.length; i++) {
+    div.comment
+      div= comments[i].author
+      div= comments[i].text
+      div= comments[i].date
+    - }

@@ -1,0 +1,22 @@
+{
+  "name": "oauth_comments",
+  "version": "1.0.0",
+  "description": "app with oauth and comments",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/delyuda/delyudarepo.git"
+  },
+  "author": "Liudmyla Demenkova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/delyuda/delyudarepo/issues"
+  },
+  "homepage": "https://github.com/delyuda/delyudarepo#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
