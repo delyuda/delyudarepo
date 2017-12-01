@@ -6,3 +6,12 @@ body {
 a {
   color: #00B7FF;
 }
+
+.comment-form__textarea {
+  width: 800px;
+  height: 80px;
+}
+
+.comment {
+  margin: 20px 0;
+}

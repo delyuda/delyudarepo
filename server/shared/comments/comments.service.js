@@ -1,11 +1,8 @@
 const Comment = require('./comment.model');
 
 exports.getComments = () => {
-    console.log('getCOmments');
-
     return Comment.find({})
         .then((result) => {
-            console.log('getComments result',result);
             return result;
         });
 };

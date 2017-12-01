@@ -10,19 +10,14 @@ router.get('/', function(req, res, next) {
     let cookie = req.cookies.token;
 
     if (cookie) {
-        let comments;
-
         commentsService.getComments()
             .then((result) => {
-                console.log('index getcomments result',result);
-                let comments = result;
-
-                res.render('index', { title: 'Home', comments: comments});
+                res.render('index', { title: 'Home', comments: result});
             });
     } else {
         let authUrl = auth.getAuthUrl();
 
-        res.render('auth', {auth_url: authUrl});
+        res.render('auth', {title: 'Authorization', auth_url: authUrl});
     }
 });
 
