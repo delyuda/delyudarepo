@@ -7,6 +7,7 @@ npm install
 
 /* Start application */
 
+cd server
 npm start
 
 /* application on http://localhost:3000  */
