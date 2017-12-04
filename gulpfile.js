@@ -1,6 +1,7 @@
 var path = {
     src: {
         js: './frontend/src/js/init.js',
+        js_dir: './frontend/src/js/**/*.js',
         libs: [
             './node_modules/jquery/dist/jquery.min.js',
             './node_modules/underscore/underscore-min.js',
@@ -37,8 +38,21 @@ gulp.task('libs', function () {
         .pipe(gulp.dest(path.build.js));
 });
 
+gulp.task('watch', function () {
+    gulp.watch(path.src.js_dir, ['build:dev']);
+});
+
+
 gulp.task('default', function(callback) {
     runSequence('js',
         'libs',
     callback);
+});
+
+gulp.task('build:dev', function (callback) {
+    runSequence(
+        'js',
+        'libs',
+        'watch',
+        callback);
 });

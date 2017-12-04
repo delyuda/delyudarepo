@@ -7,9 +7,11 @@ exports.getComments = () => {
         });
 };
 
-exports.createComment = (commentBody, author) => {
-    return Comment.create(Object.assign({}, commentBody, {
-        author: author
+exports.createComment = (commentBody, author, image) => {
+    return Comment.create(Object.assign({}, {
+        text: commentBody,
+        author: author || 'Noname',
+        image: image
     })).then((result) => {
         return result;
     });

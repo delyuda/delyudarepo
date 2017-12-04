@@ -15,6 +15,13 @@ const CommentSchema = new Schema({
         type: Date,
         required: true,
         default: Date.now
+    },
+    image: {
+        url: {
+            type: String,
+            required: false,
+            default: ""
+        }
     }
 }, {
     collection: 'Comments'

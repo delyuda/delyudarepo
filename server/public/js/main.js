@@ -21,22 +21,84 @@ var app = {
     }
 };
 
-(function (app) {
-    app.views.CommentsView = Backbone.View.extend({
+(function (models) {
+
+    models.CommentModel = Backbone.Model.extend({
+        url: '/api/comments',
+        author: "",
+        text: "",
+        image: {
+            "url": ""
+        }
+    }) ;
+
+})(app.models);
+(function (models) {
+
+    models.UserModel = Backbone.Model.extend({
+        url: '/api/user',
+        displayName: "",
+        image: {
+            url: ""
+        }
+    });
+
+})(app.models);
+
+(function (views, models) {
+    views.CommentsView = Backbone.View.extend({
         el: '#comments-wrapper',
         btn: $('#add-comment-btn'),
 
         initialize: function () {
-            console.log('init comments view');
-            console.log('this.btn',$('#add-comment-btn'));
-            $('#add-comment-btn').on('click', this.addComment);
+            this.userModel = new models.UserModel();
+            this.userModel.fetch();
+
+            this.btn.on('click', this.addComment.bind(this));
         },
 
         addComment: function () {
-            console.log('click');
+            var message,
+                model,
+                modelParams;
+
+            message = $('.comment-form__textarea').val();
+
+            if (message.trim()) {
+                modelParams = {
+                    text: message,
+                    author: this.userModel.get('displayName'),
+                    date: new Date(),
+                    image: this.userModel.get('image')
+                };
+
+                model = new  models.CommentModel(modelParams);
+                model.save();
+
+                this.createComment(modelParams);
+            }
+        },
+
+        createComment: function (params) {
+            console.log('params',params);
+            var html;
+
+            html = "" +
+            "<div class='comment'>" +
+                "<div class='logo'>" +
+                    "<img src='" + params.image.url + "' class='logo__img' />" +
+                "</div>" +
+                "<div class='comment-details'>>"+
+                    "<div class='comment-details__author'>" + params.author + "</div>" +
+                    "<div class='comment-details__text'>" + params.text + "</div>" +
+                    "<div class='comment-details__date'>" + params.date + "</div>" +
+                "</div>" +
+            "</div>";
+
+            $('.comment-list').prepend(html);
         }
     });
-})(window.app);
+})(window.app.views, window.app.models);
 
 (function (app) {
     app.initialize();

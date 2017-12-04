@@ -5,6 +5,7 @@ const CommentsCtrl = require('./comments.controller');
 const commentsCtrl = new CommentsCtrl();
 
 router.route('')
-    .get(commentsCtrl.getComments);
+    .get(commentsCtrl.getComments)
+    .post(commentsCtrl.addComment);
 
 module.exports = router;

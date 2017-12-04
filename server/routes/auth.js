@@ -10,7 +10,7 @@ router.route('')
         if (code) {
             auth.getToken(code, authorized);
 
-            function authorized (status,token,user) {
+            function authorized (status,token) {
                 if (status) {
                     res.cookie('token', token);
 

@@ -7,9 +7,9 @@ const auth = require('../auth/auth');
 let commentsService = require('../shared/comments/comments.service');
 
 router.get('/', function(req, res, next) {
-    let cookie = req.cookies.token;
+    let token = req.cookies.token;
 
-    if (cookie) {
+    if (token) {
         commentsService.getComments()
             .then((result) => {
                 res.render('index', { title: 'Home', comments: result});

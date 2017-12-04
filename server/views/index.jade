@@ -10,7 +10,10 @@ block content
     div.comment-list
       - for (var i = 0; i < comments.length; i++) {
       div.comment
-        div= comments[i].author
-        div= comments[i].text
-        div= comments[i].date
+        div.logo
+          img(src= comments[i].image.url )
+        div.comment-details
+          div.comment-details__author= comments[i].author
+          div.comment-details__text= comments[i].text
+          div.comment-details__date= comments[i].date
       - }
