@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import { BrowserRouter, Route, Link } from 'react-router-dom';
+
 import Header from './components/header/Header';
+
+import Users from './pages/Users';
 
 
 class App extends Component {
@@ -32,6 +36,9 @@ class App extends Component {
           <input type="text" value={this.state.value * 2} />
 
           <input type="text" value={this.state.value} onChange={this.handleChange} />
+
+          <Route exact path='/' component={Home}/>
+          <Route path='/users' component={Users}/>
       </div>
     );
   }
