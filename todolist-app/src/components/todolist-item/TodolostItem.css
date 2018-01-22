@@ -1,0 +1,15 @@
+.todo-item {
+    background: #efefef;
+    padding: 5px;
+    margin: 5px;
+    font-size: 13px;
+}
+
+.todo-item__header {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.todo-item__descr {
+    margin: 10px 0 15px;
+}
