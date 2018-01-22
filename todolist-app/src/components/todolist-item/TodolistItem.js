@@ -1,5 +1,5 @@
 import React from 'react';
-import './TodolostItem.css';
+import './TodolistItem.css';
 
 class TodolistItem extends React.Component{
     render() {

@@ -1,0 +1,23 @@
+.item-form {
+    width: 350px;
+    font-size: 13px;
+    background: #efefef;
+    padding: 5px 5px 10px 15px;
+    margin: 10px 0 0;
+}
+
+.item-form-elem {
+    margin: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.item-form-elem__label {
+    font-weight: bold;
+}
+
+.item-form-elem__input {
+    width: 200px;
+    margin: 10px 0 5px;
+}
