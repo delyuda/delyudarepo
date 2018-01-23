@@ -15,3 +15,10 @@ export const removeItem = id => {
         id
     }
 };
+
+export const setDataFilter = filter => {
+    return {
+        type: 'SET_DATA_FILTER',
+        filter
+    }
+};

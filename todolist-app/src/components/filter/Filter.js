@@ -9,7 +9,19 @@ class Filter extends React.Component{
                 <div className="filter-item">
                     <div className="filter-item__title">Title</div>
                     <div>
-                        <input type="text" className="filter-item__input" />
+                        <input type="text" className="filter-item__input" name="title"
+                               onChange={ (event) =>
+                                   this.props.filterData({type: 'title', value: event.target.value})
+                               }/>
+                    </div>
+                </div>
+                <div className="filter-item">
+                    <div className="filter-item__title">Date</div>
+                    <div>
+                        <input type="text" className="filter-item__input"
+                               onChange={ (event) =>
+                                   this.props.filterData({type: 'date', value: event.target.value})
+                               }/>
                     </div>
                 </div>
             </div>

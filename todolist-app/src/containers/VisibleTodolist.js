@@ -3,11 +3,11 @@ import Todolist from '../components/todolist/Todolist';
 import { removeItem } from '../actions';
 
 const getVisibleData = (data, filter) => {
-    switch (filter) {
-        // case 'SHOW_COMPLETED':
-        //     return data.filter(t => t.completed);
-        // case 'SHOW_ACTIVE':
-        //     return data.filter(t => !t.completed);
+    switch (filter.type) {
+        case 'title':
+            return data.filter(item => (item.title.toLowerCase().indexOf(filter.value.toLowerCase()) !== -1));
+        case 'date':
+            return data.filter(item => (item.created_at.indexOf(filter.value) !== -1));
         case 'SHOW_ALL':
         default:
             return data
@@ -16,7 +16,7 @@ const getVisibleData = (data, filter) => {
 
 const mapStateToProps = state => {
     return {
-        data: getVisibleData(state.data, 'SHOW_ALL')//state.visibilityFilter)
+        data: getVisibleData(state.data, state.dataFilter)//state.visibilityFilter)
     }
 };
 

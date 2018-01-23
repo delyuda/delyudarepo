@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import 'font-awesome/css/font-awesome.css';
 import './App.css';
 
-import VisibleTodolist from './containers/VisibleTodolist.js';
-import Filter from './components/filter/Filter.js';
-import ItemForm from './components/item-form/ItemForm.js';
+import VisibleTodolist from './containers/VisibleTodolist';
+import DataFilter from './containers/DataFilter';
+import ItemForm from './components/item-form/ItemForm';
 
 import { addItem } from './actions';
 
@@ -19,7 +19,7 @@ class App extends Component {
                   <ItemForm onSubmit={this.submitForm.bind(this)} />
               </div>
               <div className="main">
-                  <Filter />
+                  <DataFilter />
                   <VisibleTodolist />
               </div>
           </div>
