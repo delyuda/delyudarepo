@@ -16,7 +16,7 @@ const getVisibleData = (data, filter) => {
 
 const mapStateToProps = state => {
     return {
-        data: getVisibleData(state.data, state.dataFilter)//state.visibilityFilter)
+        data: getVisibleData(state.data, state.dataFilter)
     }
 };
 

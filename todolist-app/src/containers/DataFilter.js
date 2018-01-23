@@ -3,9 +3,7 @@ import { setDataFilter } from '../actions';
 import Filter from '../components/filter/Filter';
 
 const mapStateToProps = (state) => {
-    return {
-        filter: state.filter
-    }
+    return {}
 };
 
 const mapDispatchToProps = (dispatch) => {
