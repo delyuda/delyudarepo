@@ -8,3 +8,10 @@ export const addItem = ({title, description}) => {
         description
     }
 };
+
+export const removeItem = id => {
+    return {
+        type: 'REMOVE_ITEM',
+        id
+    }
+};

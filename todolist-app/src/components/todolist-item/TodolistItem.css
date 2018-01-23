@@ -14,3 +14,12 @@
 .todo-item__descr {
     margin: 10px 0 15px;
 }
+
+.remove-icon {
+    cursor: pointer;
+    color: #555;
+}
+
+.remove-icon:hover {
+    color: #000;
+}
