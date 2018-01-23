@@ -3,50 +3,31 @@ import React, { Component } from 'react';
 import 'font-awesome/css/font-awesome.css';
 import './App.css';
 
-import Todolist from './components/todolist/Todolist.js';
+import VisibleTodolist from './containers/VisibleTodolist.js';
 import Filter from './components/filter/Filter.js';
 import ItemForm from './components/item-form/ItemForm.js';
+
+import { addItem } from './actions';
 
 
 class App extends Component {
   render() {
-      const dataMock = [
-          {
-              id: 1,
-              title: "Test title one",
-              description: "Test description one",
-              created_at: "2018-22-01"
-          },
-          {
-              id: 2,
-              title: "Test title two",
-              description: "Test description two",
-              created_at: "2018-22-01"
-          },
-          {
-              id: 3,
-              title: "Some title three",
-              description: "Some description three",
-              created_at: "2018-22-01"
-          }
-      ];
-
       return (
           <div className="wrapper">
               <div className="add-item">
                   <div className="add-item__title">Add new todo item</div>
-                  <ItemForm onSubmit={this.submitForm} />
+                  <ItemForm onSubmit={this.submitForm.bind(this)} />
               </div>
               <div className="main">
                   <Filter />
-                  <Todolist data={dataMock} />
+                  <VisibleTodolist />
               </div>
           </div>
       );
   }
 
-  submitForm (values) {
-      console.log('values',values);
+  submitForm (values, dispatch) {
+      dispatch(addItem(values));
   }
 }
 
