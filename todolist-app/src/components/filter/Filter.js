@@ -18,7 +18,7 @@ class Filter extends React.Component{
                 <div className="filter-item">
                     <div className="filter-item__title">Date</div>
                     <div>
-                        <input type="text" className="filter-item__input"
+                        <input type="text" className="filter-item__input" placeholder="YYYY-DD-MM"
                                onChange={ (event) =>
                                    this.props.filterData({type: 'date', value: event.target.value})
                                }/>

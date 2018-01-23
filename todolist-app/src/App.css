@@ -5,10 +5,19 @@
 .main {
   display: flex;
   box-sizing: border-box;
-  width: 1000px;
 }
 
 .add-item {
   margin: 0 0 10px;
   font-size: 14px;
+}
+
+@media screen and (max-width: 1000px) {
+  .wrapper {
+    width: 100%;
+  }
+
+  .main {
+    flex-wrap: wrap;
+  }
 }
