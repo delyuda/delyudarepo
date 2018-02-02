@@ -1,0 +1,10 @@
+.group {
+    width: 200px;
+    padding: 10px;
+    background: #ddd;
+    margin: 5px;
+}
+
+.group__title {
+    margin: 5px 0 10px;
+}
