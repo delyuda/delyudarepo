@@ -24,10 +24,13 @@ function data (state = defaultState, action) {
             return state;
 
         case 'REMOVE_GROUP':
-            state.data = state.data.filter(item =>
-                (item.id === action.id));
-
-            return state;
+            const updatedData = state.data.filter(item =>
+                (item.id !== action.id));
+            return {
+                loading: false,
+                data: updatedData,
+                errors: action.errors
+            };
 
         case 'ADD_TASK':
             const taskId = calculateTaskId(state.data);

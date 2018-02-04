@@ -25,7 +25,9 @@ class GroupList extends React.Component{
 
     render () {
         const groupList = this.props.data.data.map(item =>
-            <Group key={item.id.toString()} {...item} />
+            <Group key={item.id.toString()} {...item}
+                   authState={this.props.authState}
+                   removeGroup={this.props.removeGroup} />
         );
 
         const addGroup = (this.props.authState) ?
@@ -67,7 +69,8 @@ class GroupList extends React.Component{
 
     closeModal () {
         this.setState({
-            isModalOpen: false
+            isModalOpen: false,
+            groupTitle: ''
         });
     }
 

@@ -4,8 +4,17 @@ import TaskList from '../task-list/TaskList';
 
 class Group extends React.Component{
     render () {
+        const removeBtn = (this.props.authState) ?
+            (
+                <div className="group__header">
+                    <span className="remove-group-btn" onClick={ () =>
+                        this.props.removeGroup({id: this.props.id}) } >x</span>
+                </div>
+            ) : '';
+
         return (
             <div className="group">
+                {removeBtn}
                 <div className="group__title">
                     {this.props.title}
                 </div>
