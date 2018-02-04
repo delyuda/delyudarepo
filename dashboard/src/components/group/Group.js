@@ -18,7 +18,11 @@ class Group extends React.Component{
                 <div className="group__title">
                     {this.props.title}
                 </div>
-                <TaskList tasks={this.props.tasks}/>
+                <TaskList tasks={this.props.tasks}
+                          authState={this.props.authState}
+                          groupId={this.props.id}
+                          addTask={this.props.addTask}
+                          removeTask={this.props.removeTask}/>
             </div>
         );
     }

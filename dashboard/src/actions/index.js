@@ -48,16 +48,19 @@ export const removeGroup = ({id}) => {
     }
 };
 
-export const addTask = ({title}) => {
+export const addTask = ({groupId, title, description, date}) => {
     return {
         type: 'ADD_TASK',
-        title: title
+        groupId,
+        title,
+        description,
+        date
     }
 };
 
-export const removeTask = ({id}) => {
+export const removeTask = (id) => {
     return {
         type: 'REMOVE_TASK',
-        id: id
+        id
     }
 };

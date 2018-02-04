@@ -35,7 +35,7 @@ function data (state = defaultState, action) {
         case 'ADD_TASK':
             const taskId = calculateTaskId(state.data);
 
-            state.data.forEach( item => {
+            state.data.some( item => {
                 if (item.id === action.groupId) {
                     item.tasks.push({
                         id: taskId,
@@ -43,7 +43,10 @@ function data (state = defaultState, action) {
                         description: action.description,
                         date: action.date
                     });
+
+                    return true;
                 }
+                return false;
             });
 
             return state;
@@ -52,7 +55,7 @@ function data (state = defaultState, action) {
             state.data.some( item => {
                 return item.tasks.some( (task,i) => {
                     if (task.id === action.id) {
-                        item.tasks = item.tasks.splice(i,1);
+                        item.tasks.splice(i,1);
 
                         return true;
                     }
@@ -60,7 +63,11 @@ function data (state = defaultState, action) {
                 });
             });
 
-            return state;
+            return {
+                loading: false,
+                data: state.data,
+                errors: action.errors
+            };
 
         default:
             return state;

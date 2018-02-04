@@ -27,19 +27,20 @@ class GroupList extends React.Component{
         const groupList = this.props.data.data.map(item =>
             <Group key={item.id.toString()} {...item}
                    authState={this.props.authState}
-                   removeGroup={this.props.removeGroup} />
+                   removeGroup={this.props.removeGroup}
+                   addTask={this.props.addTask}
+                   removeTask={this.props.removeTask} />
         );
 
         const addGroup = (this.props.authState) ?
             (
                 <div>
-                <div className="add-group">
-                    <button className="add-group-btn" onClick={this.openModal}>
-                        Add Group
-                    </button>
-                </div>
-                    <Modal
-                        isOpen={this.state.isModalOpen}>
+                    <div className="add-group">
+                        <button className="add-group-btn" onClick={this.openModal}>
+                            Add Group
+                        </button>
+                    </div>
+                    <Modal isOpen={this.state.isModalOpen}>
                         <h1>Add new group</h1>
                         <div>
                             <label htmlFor="group-name">Group Title: </label>
