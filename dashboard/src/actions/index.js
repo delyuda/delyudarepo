@@ -1,7 +1,6 @@
 import mockData from '../mocks/mockData';
 
 export function loadData() {
-    console.log('loadData');
     return dispatch => {
 
         dispatch({
@@ -9,7 +8,6 @@ export function loadData() {
         });
 
         setTimeout(() => {
-            console.log('timeout');
             dispatch({
                 type: 'LOAD_DATA_OK',
                 data: mockData
@@ -35,3 +33,31 @@ export function loadData() {
         //     })
     }
 }
+
+export const addGroup = ({title}) => {
+    return {
+        type: 'ADD_GROUP',
+        title: title
+    }
+};
+
+export const removeGroup = ({id}) => {
+    return {
+        type: 'REMOVE_GROUP',
+        id: id
+    }
+};
+
+export const addTask = ({title}) => {
+    return {
+        type: 'ADD_TASK',
+        title: title
+    }
+};
+
+export const removeTask = ({id}) => {
+    return {
+        type: 'REMOVE_TASK',
+        id: id
+    }
+};
