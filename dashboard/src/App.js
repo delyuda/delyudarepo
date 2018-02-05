@@ -19,7 +19,7 @@ class App extends Component {
     return (
       <div className="App">
           <UserTool authState={this.state.authState} changeAuthState={this.changeAuthState} />
-          <Dashboard authState={this.state.authState} />
+          <Dashboard authState={this.state.authState} changeAuthState={this.changeAuthState} />
       </div>
     );
   }

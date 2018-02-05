@@ -22,7 +22,8 @@ class Group extends React.Component{
                           authState={this.props.authState}
                           groupId={this.props.id}
                           addTask={this.props.addTask}
-                          removeTask={this.props.removeTask}/>
+                          removeTask={this.props.removeTask}
+                          showDetails={this.props.showDetails} />
             </div>
         );
     }

@@ -2,6 +2,12 @@ import React from 'react';
 import './Task.css';
 
 class Task extends React.Component{
+    constructor (props) {
+        super(props);
+
+        this.clickHandler = this.clickHandler.bind(this);
+    }
+
     render () {
         const removeTool = (this.props.authState) ?
             (
@@ -13,7 +19,7 @@ class Task extends React.Component{
             ) : '';
 
         return (
-            <div className="task">
+            <div className="task" onClick={this.clickHandler}>
                 {removeTool}
                 <div className="task__title">
                     {this.props.title}
@@ -23,6 +29,14 @@ class Task extends React.Component{
                 </div>
             </div>
         );
+    }
+
+    clickHandler () {
+        this.props.showDetails({
+            title: this.props.title,
+            description: this.props.description,
+            date: this.props.date
+        });
     }
 }
 

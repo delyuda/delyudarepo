@@ -3,6 +3,8 @@ import './GroupList.css';
 import Modal from 'react-modal';
 
 import Group from '../group/Group';
+import TaskDetails from '../task-details/TaskDetails';
+import LoginModal from '../login-modal/LoginModal';
 
 class GroupList extends React.Component{
     constructor (props) {
@@ -10,13 +12,23 @@ class GroupList extends React.Component{
 
         this.state = {
             isModalOpen: false,
-            groupTitle: ''
+            groupTitle: '',
+            isDetailsModalOpen: false,
+            details: {
+                title: '',
+                description: '',
+                date: ''
+            },
+            isLoginModalOpen: false
         };
 
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.groupInputChange = this.groupInputChange.bind(this);
         this.addGroup = this.addGroup.bind(this);
+        this.showDetails = this.showDetails.bind(this);
+        this.hideDetails = this.hideDetails.bind(this);
+        this.login = this.login.bind(this);
     }
 
     componentDidMount () {
@@ -29,10 +41,11 @@ class GroupList extends React.Component{
                    authState={this.props.authState}
                    removeGroup={this.props.removeGroup}
                    addTask={this.props.addTask}
-                   removeTask={this.props.removeTask} />
+                   removeTask={this.props.removeTask}
+                   showDetails={this.showDetails}/>
         );
 
-        const addGroup = (this.props.authState) ?
+        const content = (this.props.authState) ?
             (
                 <div>
                     <div className="add-group">
@@ -40,6 +53,7 @@ class GroupList extends React.Component{
                             Add Group
                         </button>
                     </div>
+
                     <Modal isOpen={this.state.isModalOpen}>
                         <h1>Add new group</h1>
                         <div>
@@ -50,14 +64,23 @@ class GroupList extends React.Component{
                         <button onClick={this.addGroup}>Create Group</button>
                         <button onClick={this.closeModal}>Cancel</button>
                     </Modal>
+
+                    <TaskDetails isOpen={this.state.isDetailsModalOpen}
+                                 title={this.state.details.title}
+                                 description={this.state.details.description}
+                                 date={this.state.details.date}
+                                 closeModal={this.hideDetails} />
                 </div>
             ) :
-            "";
+            (
+                <LoginModal isOpen={this.state.isLoginModalOpen}
+                            login={this.login} />
+            );
 
         return (
             <div className="group-list">
                 {groupList}
-                {addGroup}
+                {content}
             </div>
         );
     }
@@ -87,6 +110,44 @@ class GroupList extends React.Component{
         });
 
         this.closeModal();
+    }
+
+    showDetails ({title, description, date}) {
+        if (this.props.authState) {
+            this.setState({
+                details: {
+                    title: title,
+                    description: description,
+                    date: date
+                },
+                isDetailsModalOpen: true
+            })
+        } else {
+            this.openLoginModal();
+        }
+    }
+
+    hideDetails () {
+        this.setState({
+            isDetailsModalOpen: false
+        });
+    }
+
+    openLoginModal () {
+        this.setState({
+            isLoginModalOpen: true
+        });
+    }
+
+    closeLoginModal () {
+        this.setState({
+            isLoginModalOpen: false
+        });
+    }
+
+    login () {
+        this.props.changeAuthState();
+        this.closeLoginModal();
     }
 }
 

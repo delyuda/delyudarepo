@@ -27,7 +27,8 @@ class TaskList extends React.Component{
         const taskList = this.props.tasks.map( item =>
             <Task key={item.id.toString()} {...item}
                 authState={this.props.authState}
-                removeTask={this.props.removeTask} />
+                removeTask={this.props.removeTask}
+                showDetails={this.props.showDetails} />
         );
 
         const addTask = (this.props.authState) ?
