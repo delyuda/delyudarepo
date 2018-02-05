@@ -12,20 +12,20 @@ class Task extends React.Component{
         const removeTool = (this.props.authState) ?
             (
                 <div className="task__header">
-                    <span className="remove-task-btn" onClick={() => {
+                    <span className="glyphicon glyphicon-remove remove-task-btn" onClick={() => {
                         this.props.removeTask(this.props.id)
-                    }}>x</span>
+                    }} title="Remove Task"></span>
                 </div>
             ) : '';
 
         return (
-            <div className="task" onClick={this.clickHandler}>
+            <div className="task" onClick={this.clickHandler} title={this.props.title}>
                 {removeTool}
                 <div className="task__title">
                     {this.props.title}
                 </div>
                 <div className="task__date">
-                    {this.props.date}
+                    Due To: {this.props.date}
                 </div>
             </div>
         );

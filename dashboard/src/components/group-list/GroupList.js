@@ -29,6 +29,7 @@ class GroupList extends React.Component{
         this.showDetails = this.showDetails.bind(this);
         this.hideDetails = this.hideDetails.bind(this);
         this.login = this.login.bind(this);
+        this.closeLoginModal = this.closeLoginModal.bind(this);
     }
 
     componentDidMount () {
@@ -49,20 +50,37 @@ class GroupList extends React.Component{
             (
                 <div>
                     <div className="add-group">
-                        <button className="add-group-btn" onClick={this.openModal}>
-                            Add Group
-                        </button>
+                        <div className="add-group-btn" onClick={this.openModal} title="Add New Group">
+                            <span className="glyphicon glyphicon-plus"></span>
+                            <div>Add Group</div>
+                        </div>
                     </div>
 
-                    <Modal isOpen={this.state.isModalOpen}>
-                        <h1>Add new group</h1>
-                        <div>
+                    <Modal appElement={document.getElementById('root')}
+                           isOpen={this.state.isModalOpen}
+                           style={{
+                               content: {
+                                   width: '350px',
+                                   height: '200px',
+                                   margin: 'auto auto',
+                                   padding: '40px 10px 0'
+                               }
+                           }}>
+                        <div className="new-group-title">Add new group</div>
+                        <div className="form-group">
                             <label htmlFor="group-name">Group Title: </label>
-                            <input type='text' id="group-name" value={this.state.groupTitle}
+                            <input type='text' id="group-name" className="form-control"
+                                   value={this.state.groupTitle}
                                    onChange={this.groupInputChange} />
                         </div>
-                        <button onClick={this.addGroup}>Create Group</button>
-                        <button onClick={this.closeModal}>Cancel</button>
+                        <div className="btn-toolbar">
+                            <button className="btn btn-success" onClick={this.addGroup}>
+                                Create Group
+                            </button>
+                            <button className="btn btn-default" onClick={this.closeModal}>
+                                Cancel
+                            </button>
+                        </div>
                     </Modal>
 
                     <TaskDetails isOpen={this.state.isDetailsModalOpen}
@@ -74,7 +92,8 @@ class GroupList extends React.Component{
             ) :
             (
                 <LoginModal isOpen={this.state.isLoginModalOpen}
-                            login={this.login} />
+                            login={this.login}
+                            close={this.closeLoginModal} />
             );
 
         return (

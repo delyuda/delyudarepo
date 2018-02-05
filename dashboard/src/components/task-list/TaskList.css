@@ -1,0 +1,26 @@
+.add-task-btn {
+    color: #777;
+    cursor: pointer;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.add-task-btn:hover {
+    color: #222;
+}
+
+.new-task-header {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 0 10px;
+}
+
+.task-description {
+    min-height: 70px;
+}
+
+.btn-toolbar {
+    margin: 20px 0 5px;
+    display: flex;
+    justify-content: space-between;
+}

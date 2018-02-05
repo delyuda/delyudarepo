@@ -1,0 +1,19 @@
+.task-details__title {
+    height: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 0 10px;
+}
+
+.task-details__description {
+    height: 220px;
+    overflow: auto;
+}
+
+.task-details__date {
+    margin: 10px 0;
+}
+
+.close-btn {
+    float: right;
+}

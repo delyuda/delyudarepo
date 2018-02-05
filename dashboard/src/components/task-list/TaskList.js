@@ -35,32 +35,58 @@ class TaskList extends React.Component{
             (
                 <div>
                     <div className="add-task">
-                        <button onClick={this.openModal}>Add Task</button>
+                        <div onClick={this.openModal} className="add-task-btn" title="Add New Task">
+                            <span className="glyphicon glyphicon-plus"></span>
+                            Add Task
+                        </div>
                     </div>
-                    <Modal isOpen={this.state.isModalOpen}>
-                        <div className="">
+                    <Modal appElement={document.getElementById('root')}
+                           isOpen={this.state.isModalOpen}
+                           style={{
+                               content: {
+                                   width: '450px',
+                                   height: '360px',
+                                   margin: 'auto auto',
+                                   padding: '40px 10px 0'
+                               }
+                           }}>
+                        <div className="new-task-header">
+                            Add New Task
+                        </div>
+                        <div className="from-group">
                             <label htmlFor="task-title">
                                 Title
                             </label>
-                            <input type="text" id="task-title" value={this.state.taskTitle}
+                            <input type="text" id="task-title" className="form-control"
+                                   value={this.state.taskTitle}
                                 onChange={this.onChangeTask} />
                         </div>
-                        <div className="">
+                        <div className="from-group">
                             <label htmlFor="task-descr">
-                                Description
+                                Description:
                             </label>
-                            <textarea id="task-descr" value={this.state.taskDescription}
-                                onChange={this.onChangeDescription}>Description here</textarea>
+                            <textarea id="task-descr" className="form-control task-description"
+                                      value={this.state.taskDescription}
+                                      onChange={this.onChangeDescription}>
+                                Description here
+                            </textarea>
                         </div>
-                        <div className="">
+                        <div className="from-group">
                             <label htmlFor="task-date">
-                                Due Date
+                                Due Date:
                             </label>
-                            <input type="text" id="task-date" value={this.state.taskDate}
-                                onChange={this.onChangeDate} />
+                            <input type="text" id="task-date" className="form-control"
+                                   value={this.state.taskDate}
+                                   onChange={this.onChangeDate} />
                         </div>
-                        <button onClick={this.addTaskHandler}>Create Task</button>
-                        <button onClick={this.closeModal}>Cancel</button>
+                        <div className="btn-toolbar">
+                            <button className="btn btn-success" onClick={this.addTaskHandler}>
+                                Create Task
+                            </button>
+                            <button className="btn btn-default" onClick={this.closeModal}>
+                                Cancel
+                            </button>
+                        </div>
                     </Modal>
                 </div>
             ) : '';

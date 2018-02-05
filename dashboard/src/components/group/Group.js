@@ -7,8 +7,8 @@ class Group extends React.Component{
         const removeBtn = (this.props.authState) ?
             (
                 <div className="group__header">
-                    <span className="remove-group-btn" onClick={ () =>
-                        this.props.removeGroup({id: this.props.id}) } >x</span>
+                    <span className="glyphicon glyphicon-remove remove-group-btn" onClick={ () =>
+                        this.props.removeGroup({id: this.props.id}) } title="Remove Group"></span>
                 </div>
             ) : '';
 

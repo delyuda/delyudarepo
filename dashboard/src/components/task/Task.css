@@ -14,4 +14,20 @@
 
 .task__title {
     font-weight: bold;
+    height: 62px;
+    overflow: hidden;
+}
+
+.task__header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 5px;
+}
+
+.remove-task-btn {
+    color: #999;
+}
+
+.remove-task-btn:hover {
+    color: #222;
 }

@@ -1,0 +1,5 @@
+.user-tool__login {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+}

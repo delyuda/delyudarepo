@@ -1,10 +1,26 @@
 .group {
-    width: 200px;
+    width: 220px;
     padding: 10px;
     background: #ddd;
     margin: 5px;
 }
 
+.group__header {
+    display: flex;
+    justify-content: flex-end;
+}
+
 .group__title {
+    height: 35px;
+    overflow: hidden;
     margin: 5px 0 10px;
+}
+
+.remove-group-btn {
+    cursor: pointer;
+    color: #777;
+}
+
+.remove-group-btn:hover {
+    color: #222;
 }

@@ -1,4 +1,29 @@
 .group-list {
     display: flex;
+}
 
+.add-group {
+    margin: 10px;
+}
+
+.add-group-btn {
+    width: 80px;
+    height: 80px;
+    border: solid 1px #ddd;
+    border-radius: 40px;
+    padding: 10px 0 0;
+    font-weight: bold;
+    color: #777;
+    cursor: pointer;
+}
+
+.add-group-btn:hover {
+    border-color: #777;
+    color: #222;
+}
+
+.new-group-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 0 10px;
 }
