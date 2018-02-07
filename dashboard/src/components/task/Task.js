@@ -23,17 +23,19 @@ class Task extends React.Component{
                 </div>
             ) : '';
 
-        return connectDragSource(
+        const taskContent = (
             <div className="task" onClick={this.clickHandler} title={this.props.title}>
-                {removeTool}
-                <div className="task__title">
-                    {this.props.title}
-                </div>
-                <div className="task__date">
-                    Due To: {this.props.date}
-                </div>
+            {removeTool}
+            <div className="task__title">
+                {this.props.title}
             </div>
+            <div className="task__date">
+                Due To: {this.props.date}
+            </div>
+        </div>
         );
+
+        return (this.props.authState) ? connectDragSource(taskContent) : taskContent;
     }
 
     clickHandler () {
