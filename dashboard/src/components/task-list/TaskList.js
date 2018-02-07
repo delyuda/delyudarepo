@@ -28,7 +28,6 @@ class TaskList extends React.Component{
             <Task key={item.id.toString()} {...item}
                 authState={this.props.authState}
                 removeTask={this.props.removeTask}
-                replaceTask={this.props.replaceTask}
                 showDetails={this.props.showDetails} />
         );
 

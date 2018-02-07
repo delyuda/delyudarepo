@@ -65,10 +65,11 @@ export const removeTask = (id) => {
     }
 };
 
-export const replaceTask = ({taskId, groupId}) => {
+export const replaceTask = ({taskId, groupId, posIndex}) => {
     return {
         type: 'REPLACE_TASK',
         taskId,
-        groupId
+        groupId,
+        posIndex
     }
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import { DragSource } from 'react-dnd';
 import './Task.css';
+
 import { ItemTypes } from '../../consts/consts';
 
 class Task extends React.Component{
@@ -54,22 +55,11 @@ const taskSource = {
         return {
             id: props.id
         }
-    },
-
-    endDrag(props, monitor) {
-        let res = monitor.getDropResult();
-
-        if (res && res.groupId) {
-            props.replaceTask({
-                taskId: props.id,
-                groupId: res.groupId
-            });
-        }
     }
 };
 
 
-function collect (connect, monitor) {
+function collect (connect) {
     return {
         connectDragSource: connect.dragSource()
     }

@@ -85,7 +85,7 @@ function data (state = defaultState, action) {
 
             state.data.some( item => {
                 if (item.id === action.groupId) {
-                    item.tasks.push(taskData[0]);
+                    item.tasks.splice(action.posIndex, 0, taskData[0]);
                     return true;
                 }
                 return false;

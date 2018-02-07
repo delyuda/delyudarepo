@@ -1,10 +1,12 @@
 import React from 'react';
 import { DropTarget } from 'react-dnd';
+import { findDOMNode } from 'react-dom';
 
 import './Group.css';
 
+
 import TaskList from '../task-list/TaskList';
-import { ItemTypes } from '../../consts/consts';
+import { ItemTypes, taskHeight, titleHeight } from '../../consts/consts';
 
 class Group extends React.Component{
     render () {
@@ -29,7 +31,6 @@ class Group extends React.Component{
                           groupId={this.props.id}
                           addTask={this.props.addTask}
                           removeTask={this.props.removeTask}
-                          replaceTask={this.props.replaceTask}
                           showDetails={this.props.showDetails} />
             </div>
         );
@@ -37,10 +38,22 @@ class Group extends React.Component{
 }
 
 const groupTarget = {
-    drop(props) {
-        return {
-            groupId: props.id
-        };
+    drop(props, monitor, component) {
+        const componentRect = findDOMNode(component).getBoundingClientRect();
+        const top = componentRect.top + titleHeight - taskHeight/2;
+
+        const offset= monitor.getSourceClientOffset();
+        const yPos = offset.y - top;
+        const itemPos = Math.floor(yPos/taskHeight);
+        let posIndex = (itemPos < props.tasks.length) ? itemPos : props.tasks.length;
+
+        const item = monitor.getItem();
+
+        props.replaceTask({
+            groupId: props.id,
+            taskId: item.id,
+            posIndex
+        });
     }
 };
 
