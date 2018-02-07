@@ -61,6 +61,7 @@ class GroupList extends React.Component{
 
                     <Modal appElement={document.getElementById('root')}
                            isOpen={this.state.isModalOpen}
+                           onRequestClose={this.closeModal}
                            style={{
                                content: {
                                    width: '350px',

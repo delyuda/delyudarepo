@@ -43,6 +43,7 @@ class TaskList extends React.Component{
                     </div>
                     <Modal appElement={document.getElementById('root')}
                            isOpen={this.state.isModalOpen}
+                           onRequestClose={this.closeModal}
                            style={{
                                content: {
                                    width: '450px',

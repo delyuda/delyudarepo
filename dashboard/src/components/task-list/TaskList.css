@@ -17,6 +17,7 @@
 
 .task-description {
     min-height: 70px;
+    resize: none;
 }
 
 .btn-toolbar {
