@@ -1,9 +1,15 @@
 import React from 'react';
+import { DropTarget } from 'react-dnd';
+
 import './Group.css';
+
 import TaskList from '../task-list/TaskList';
+import { ItemTypes } from '../../consts/consts';
 
 class Group extends React.Component{
     render () {
+        const { connectDropTarget } = this.props;
+
         const removeBtn = (this.props.authState) ?
             (
                 <div className="group__header">
@@ -12,7 +18,7 @@ class Group extends React.Component{
                 </div>
             ) : '';
 
-        return (
+        return connectDropTarget(
             <div className="group">
                 {removeBtn}
                 <div className="group__title">
@@ -23,10 +29,26 @@ class Group extends React.Component{
                           groupId={this.props.id}
                           addTask={this.props.addTask}
                           removeTask={this.props.removeTask}
+                          replaceTask={this.props.replaceTask}
                           showDetails={this.props.showDetails} />
             </div>
         );
     }
 }
 
-export default Group;
+const groupTarget = {
+    drop(props) {
+        return {
+            groupId: props.id
+        };
+    }
+};
+
+function collect (connect, monitor) {
+    return {
+        connectDropTarget: connect.dropTarget(),
+        isOver: monitor.isOver()
+    }
+}
+
+export default DropTarget(ItemTypes.TASK, groupTarget, collect)(Group);

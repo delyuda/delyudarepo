@@ -1,6 +1,8 @@
 import React from 'react';
 import './GroupList.css';
 import Modal from 'react-modal';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 import Group from '../group/Group';
 import TaskDetails from '../task-details/TaskDetails';
@@ -43,6 +45,7 @@ class GroupList extends React.Component{
                    removeGroup={this.props.removeGroup}
                    addTask={this.props.addTask}
                    removeTask={this.props.removeTask}
+                   replaceTask={this.props.replaceTask}
                    showDetails={this.showDetails}/>
         );
 
@@ -170,4 +173,4 @@ class GroupList extends React.Component{
     }
 }
 
-export default GroupList;
+export default DragDropContext(HTML5Backend)(GroupList);

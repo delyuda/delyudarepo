@@ -1,5 +1,7 @@
 import React from 'react';
+import { DragSource } from 'react-dnd';
 import './Task.css';
+import { ItemTypes } from '../../consts/consts';
 
 class Task extends React.Component{
     constructor (props) {
@@ -9,6 +11,8 @@ class Task extends React.Component{
     }
 
     render () {
+        const { connectDragSource } = this.props;
+
         const removeTool = (this.props.authState) ?
             (
                 <div className="task__header">
@@ -18,7 +22,7 @@ class Task extends React.Component{
                 </div>
             ) : '';
 
-        return (
+        return connectDragSource(
             <div className="task" onClick={this.clickHandler} title={this.props.title}>
                 {removeTool}
                 <div className="task__title">
@@ -40,5 +44,30 @@ class Task extends React.Component{
     }
 }
 
+const taskSource = {
+    beginDrag(props) {
+        return {
+            id: props.id
+        }
+    },
 
-export default Task;
+    endDrag(props, monitor) {
+        let res = monitor.getDropResult();
+
+        if (res && res.groupId) {
+            props.replaceTask({
+                taskId: props.id,
+                groupId: res.groupId
+            });
+        }
+    }
+};
+
+
+function collect (connect, monitor) {
+    return {
+        connectDragSource: connect.dragSource()
+    }
+}
+
+export default DragSource(ItemTypes.TASK, taskSource, collect)(Task);

@@ -69,6 +69,34 @@ function data (state = defaultState, action) {
                 errors: action.errors
             };
 
+        case 'REPLACE_TASK':
+            let taskData;
+
+            state.data.some( item => {
+                return item.tasks.some( (task,i) => {
+                    if (task.id === action.taskId) {
+                        taskData = item.tasks.splice(i,1);
+
+                        return true;
+                    }
+                    return false;
+                });
+            });
+
+            state.data.some( item => {
+                if (item.id === action.groupId) {
+                    item.tasks.push(taskData[0]);
+                    return true;
+                }
+                return false;
+            });
+
+            return {
+                loading: false,
+                data: state.data,
+                errors: action.errors
+            };
+
         default:
             return state;
     }

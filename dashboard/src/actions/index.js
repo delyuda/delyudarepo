@@ -64,3 +64,11 @@ export const removeTask = (id) => {
         id
     }
 };
+
+export const replaceTask = ({taskId, groupId}) => {
+    return {
+        type: 'REPLACE_TASK',
+        taskId,
+        groupId
+    }
+};
