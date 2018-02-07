@@ -8,6 +8,7 @@ class Task extends React.Component{
         super(props);
 
         this.clickHandler = this.clickHandler.bind(this);
+        this.removeTask = this.removeTask.bind(this);
     }
 
     render () {
@@ -16,9 +17,8 @@ class Task extends React.Component{
         const removeTool = (this.props.authState) ?
             (
                 <div className="task__header">
-                    <span className="glyphicon glyphicon-remove remove-task-btn" onClick={() => {
-                        this.props.removeTask(this.props.id)
-                    }} title="Remove Task"></span>
+                    <span className="glyphicon glyphicon-remove remove-task-btn" onClick={this.removeTask}
+                          title="Remove Task"></span>
                 </div>
             ) : '';
 
@@ -41,6 +41,11 @@ class Task extends React.Component{
             description: this.props.description,
             date: this.props.date
         });
+    }
+
+    removeTask (e) {
+        e.stopPropagation();
+        this.props.removeTask(this.props.id)
     }
 }
 
