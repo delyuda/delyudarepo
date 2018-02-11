@@ -6,6 +6,7 @@ class TaskDetails extends React.Component{
     render () {
         return (
             <Modal appElement={document.getElementById('root')}
+                   onRequestClose={this.props.closeModal}
                    isOpen={this.props.isOpen}
                    style={{
                        content: {

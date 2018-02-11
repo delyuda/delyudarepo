@@ -7,6 +7,7 @@ class LoginModal extends React.Component{
         return (
             <Modal appElement={document.getElementById('root')}
                    isOpen={this.props.isOpen}
+                   onRequestClose={this.props.close}
                    style={{
                        content: {
                            width: '200px',

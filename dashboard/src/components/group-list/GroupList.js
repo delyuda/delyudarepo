@@ -96,6 +96,7 @@ class GroupList extends React.Component{
             ) :
             (
                 <LoginModal isOpen={this.state.isLoginModalOpen}
+                            onRequestClose={this.closeLoginModal}
                             login={this.login}
                             close={this.closeLoginModal} />
             );
