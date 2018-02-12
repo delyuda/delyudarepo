@@ -38,6 +38,7 @@ class Group extends React.Component{
                           groupId={this.props.id}
                           addTask={this.props.addTask}
                           removeTask={this.props.removeTask}
+                          updateTask={this.props.updateTask}
                           showDetails={this.props.showDetails} />
             </div>
         );

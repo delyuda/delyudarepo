@@ -24,10 +24,16 @@
     padding: 0 5px;
 }
 
-.remove-task-btn {
+.remove-task-btn,
+.edit-task-btn{
     color: #999;
 }
 
-.remove-task-btn:hover {
+.edit-task-btn {
+    margin-right: 7px;
+}
+
+.remove-task-btn:hover,
+.edit-task-btn:hover{
     color: #222;
 }

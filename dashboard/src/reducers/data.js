@@ -112,6 +112,27 @@ function data (state = defaultState, action) {
                 errors: action.errors
             };
 
+        case 'UPDATE_TASK':
+            state.data.some( item => {
+                return item.tasks.some( (task) => {
+                    if (task.id === action.id) {
+                        task.title = action.title;
+                        task.description = action.description;
+                        task.date = action.date;
+
+                        return true;
+                    }
+                    return false;
+                });
+            });
+
+            return {
+                loading: false,
+                data: state.data,
+                errors: action.errors
+            };
+
+
         default:
             return state;
     }

@@ -50,6 +50,7 @@ class GroupList extends React.Component{
                    addTask={this.props.addTask}
                    removeTask={this.props.removeTask}
                    replaceTask={this.props.replaceTask}
+                   updateTask={this.props.updateTask}
                    showDetails={this.showDetails}
                    updateGroup={this.updateGroupHandler}/>
         );

@@ -10,6 +10,7 @@ class Task extends React.Component{
 
         this.clickHandler = this.clickHandler.bind(this);
         this.removeTask = this.removeTask.bind(this);
+        this.editTask = this.editTask.bind(this);
     }
 
     render () {
@@ -18,6 +19,8 @@ class Task extends React.Component{
         const removeTool = (this.props.authState) ?
             (
                 <div className="task__header">
+                    <span className="glyphicon glyphicon-pencil edit-task-btn" onClick={this.editTask}
+                          title="Edit Task"></span>
                     <span className="glyphicon glyphicon-remove remove-task-btn" onClick={this.removeTask}
                           title="Remove Task"></span>
                 </div>
@@ -48,7 +51,18 @@ class Task extends React.Component{
 
     removeTask (e) {
         e.stopPropagation();
-        this.props.removeTask(this.props.id)
+        this.props.removeTask(this.props.id);
+    }
+
+    editTask (e) {
+        e.stopPropagation();
+
+        this.props.updateTask({
+            id: this.props.id,
+            title: this.props.title,
+            description: this.props.description,
+            date: this.props.date
+        });
     }
 }
 

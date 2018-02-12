@@ -10,9 +10,11 @@ class TaskList extends React.Component{
 
         this.state = {
             isModalOpen: false,
+            isTaskUpdate: false,
             taskTitle: '',
             taskDescription: '',
-            taskDate: ''
+            taskDate: '',
+            taskId: null
         };
 
         this.openModal = this.openModal.bind(this);
@@ -21,6 +23,8 @@ class TaskList extends React.Component{
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
         this.addTaskHandler = this.addTaskHandler.bind(this);
+        this.updateTaskHandler = this.updateTaskHandler.bind(this);
+        this.updateTask = this.updateTask.bind(this);
     }
 
     render () {
@@ -28,7 +32,8 @@ class TaskList extends React.Component{
             <Task key={item.id.toString()} {...item}
                 authState={this.props.authState}
                 removeTask={this.props.removeTask}
-                showDetails={this.props.showDetails} />
+                showDetails={this.props.showDetails}
+                updateTask={this.updateTaskHandler} />
         );
 
         const addTask = (this.props.authState) ?
@@ -81,9 +86,15 @@ class TaskList extends React.Component{
                                    onChange={this.onChangeDate} />
                         </div>
                         <div className="btn-toolbar">
-                            <button className="btn btn-success" onClick={this.addTaskHandler}>
-                                Create Task
-                            </button>
+                            {
+                                this.state.isTaskUpdate ?
+                                <button className="btn btn-success" onClick={this.updateTask}>
+                                    Update Task
+                                </button>:
+                                <button className="btn btn-success" onClick={this.addTaskHandler}>
+                                    Create Task
+                                </button>
+                            }
                             <button className="btn btn-default" onClick={this.closeModal}>
                                 Cancel
                             </button>
@@ -100,18 +111,25 @@ class TaskList extends React.Component{
         );
     }
 
-    openModal () {
+    openModal ({isTaskUpdate = false, title = '', description = '', date = '', id = null}) {
         this.setState({
-            isModalOpen: true
+            isModalOpen: true,
+            isTaskUpdate: isTaskUpdate,
+            taskTitle: title,
+            taskDescription: description,
+            taskDate: date,
+            taskId: id
         });
     }
 
     closeModal () {
         this.setState({
             isModalOpen: false,
+            isTaskUpdate: false,
             taskTitle: '',
             taskDescription: '',
-            taskDate: ''
+            taskDate: '',
+            taskId: null
         });
     }
 
@@ -136,6 +154,27 @@ class TaskList extends React.Component{
     addTaskHandler () {
         this.props.addTask({
             groupId: this.props.groupId,
+            title: this.state.taskTitle,
+            description: this.state.taskDescription,
+            date: this.state.taskDate
+        });
+
+        this.closeModal();
+    }
+
+    updateTaskHandler ({id, title, description, date}) {
+        this.openModal({
+            isTaskUpdate: true,
+            title,
+            description,
+            date,
+            id
+        });
+    }
+
+    updateTask () {
+        this.props.updateTask({
+            id: this.state.taskId,
             title: this.state.taskTitle,
             description: this.state.taskDescription,
             date: this.state.taskDate

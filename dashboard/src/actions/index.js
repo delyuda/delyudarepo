@@ -81,3 +81,13 @@ export const replaceTask = ({taskId, groupId, posIndex}) => {
         posIndex
     }
 };
+
+export const updateTask = ({id, title, description, date}) => {
+    return {
+        type: 'UPDATE_TASK',
+        id,
+        title,
+        description,
+        date
+    }
+};

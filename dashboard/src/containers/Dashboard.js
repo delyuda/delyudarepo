@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import GroupList from '../components/group-list/GroupList';
 
-import { loadData, addGroup, updateGroup, removeGroup, addTask, removeTask, replaceTask } from '../actions';
+import { loadData, addGroup, updateGroup, removeGroup,
+    addTask, removeTask, replaceTask, updateTask } from '../actions';
 
 const mapStateToProps = state => {
     return state;
@@ -35,6 +36,10 @@ const mapDispatchToProps = dispatch => {
 
         replaceTask: (params) => {
             dispatch(replaceTask(params))
+        },
+
+        updateTask: (task) => {
+            dispatch(updateTask(task))
         }
     };
 };
