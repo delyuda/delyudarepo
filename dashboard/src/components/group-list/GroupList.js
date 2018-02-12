@@ -15,6 +15,8 @@ class GroupList extends React.Component{
         this.state = {
             isModalOpen: false,
             groupTitle: '',
+            groupId: null,
+            isGroupUpdate: false,
             isDetailsModalOpen: false,
             details: {
                 title: '',
@@ -32,6 +34,8 @@ class GroupList extends React.Component{
         this.hideDetails = this.hideDetails.bind(this);
         this.login = this.login.bind(this);
         this.closeLoginModal = this.closeLoginModal.bind(this);
+        this.updateGroupHandler = this.updateGroupHandler.bind(this);
+        this.updateGroup = this.updateGroup.bind(this);
     }
 
     componentDidMount () {
@@ -46,7 +50,8 @@ class GroupList extends React.Component{
                    addTask={this.props.addTask}
                    removeTask={this.props.removeTask}
                    replaceTask={this.props.replaceTask}
-                   showDetails={this.showDetails}/>
+                   showDetails={this.showDetails}
+                   updateGroup={this.updateGroupHandler}/>
         );
 
         const content = (this.props.authState) ?
@@ -78,9 +83,14 @@ class GroupList extends React.Component{
                                    onChange={this.groupInputChange} />
                         </div>
                         <div className="btn-toolbar">
-                            <button className="btn btn-success" onClick={this.addGroup}>
-                                Create Group
-                            </button>
+                            {this.state.isGroupUpdate ?
+                                <button className="btn btn-success" onClick={this.updateGroup}>
+                                    Update Group
+                                </button> :
+                                <button className="btn btn-success" onClick={this.addGroup}>
+                                    Create Group
+                                </button>
+                            }
                             <button className="btn btn-default" onClick={this.closeModal}>
                                 Cancel
                             </button>
@@ -109,16 +119,21 @@ class GroupList extends React.Component{
         );
     }
 
-    openModal () {
+    openModal ({isGroupUpdate = false, groupTitle = '', groupId = null}) {
         this.setState({
-            isModalOpen: true
+            isModalOpen: true,
+            isGroupUpdate,
+            groupTitle,
+            groupId
         });
     }
 
     closeModal () {
         this.setState({
             isModalOpen: false,
-            groupTitle: ''
+            groupTitle: '',
+            isGroupUpdate: false,
+            groupId: null
         });
     }
 
@@ -172,6 +187,23 @@ class GroupList extends React.Component{
     login () {
         this.props.changeAuthState();
         this.closeLoginModal();
+    }
+
+    updateGroupHandler ({id, title}) {
+        this.openModal({
+            isGroupUpdate: true,
+            groupTitle: title,
+            groupId: id
+        });
+    }
+
+    updateGroup () {
+        this.props.updateGroup({
+            title: this.state.groupTitle,
+            id: this.state.groupId
+        });
+
+        this.closeModal();
     }
 }
 

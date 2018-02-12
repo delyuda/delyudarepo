@@ -9,12 +9,19 @@ import TaskList from '../task-list/TaskList';
 import { ItemTypes, taskHeight, titleHeight } from '../../consts/consts';
 
 class Group extends React.Component{
+    constructor (props) {
+        super(props);
+        this.updateGroup = this.updateGroup.bind(this);
+    }
+
     render () {
         const { connectDropTarget } = this.props;
 
         const removeBtn = (this.props.authState) ?
             (
                 <div className="group__header">
+                    <span className="glyphicon glyphicon-pencil edit-group-btn"
+                          onClick={this.updateGroup} title="Edit Group Name"></span>
                     <span className="glyphicon glyphicon-remove remove-group-btn" onClick={ () =>
                         this.props.removeGroup({id: this.props.id}) } title="Remove Group"></span>
                 </div>
@@ -34,6 +41,13 @@ class Group extends React.Component{
                           showDetails={this.props.showDetails} />
             </div>
         );
+    }
+
+    updateGroup () {
+        this.props.updateGroup({
+            id: this.props.id,
+            title: this.props.title
+        })
     }
 }
 

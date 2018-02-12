@@ -16,11 +16,17 @@
     margin: 5px 0 10px;
 }
 
-.remove-group-btn {
+.remove-group-btn,
+.edit-group-btn {
     cursor: pointer;
     color: #777;
 }
 
-.remove-group-btn:hover {
+.edit-group-btn {
+    margin-right: 7px;
+}
+
+.remove-group-btn:hover,
+.edit-group-btn:hover{
     color: #222;
 }

@@ -23,6 +23,21 @@ function data (state = defaultState, action) {
 
             return state;
 
+        case 'UPDATE_GROUP':
+            state.data.some( item => {
+                if (item.id === action.id) {
+                    item.title = action.title;
+                    return true;
+                }
+                return false;
+            });
+
+            return {
+                loading: false,
+                data: state.data,
+                errors: action.errors
+            };
+
         case 'REMOVE_GROUP':
             const updatedData = state.data.filter(item =>
                 (item.id !== action.id));

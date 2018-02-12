@@ -41,6 +41,14 @@ export const addGroup = ({title}) => {
     }
 };
 
+export const updateGroup = ({id, title}) => {
+    return {
+        type: 'UPDATE_GROUP',
+        title,
+        id
+    }
+};
+
 export const removeGroup = ({id}) => {
     return {
         type: 'REMOVE_GROUP',
