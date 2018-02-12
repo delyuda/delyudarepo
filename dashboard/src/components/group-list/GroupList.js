@@ -6,7 +6,6 @@ import HTML5Backend from 'react-dnd-html5-backend';
 
 import Group from '../group/Group';
 import TaskDetails from '../task-details/TaskDetails';
-import LoginModal from '../login-modal/LoginModal';
 
 class GroupList extends React.Component{
     constructor (props) {
@@ -52,7 +51,7 @@ class GroupList extends React.Component{
                    replaceTask={this.props.replaceTask}
                    updateTask={this.props.updateTask}
                    showDetails={this.showDetails}
-                   updateGroup={this.updateGroupHandler}/>
+                   updateGroup={this.updateGroupHandler} />
         );
 
         const content = (this.props.authState) ?
@@ -104,13 +103,7 @@ class GroupList extends React.Component{
                                  date={this.state.details.date}
                                  closeModal={this.hideDetails} />
                 </div>
-            ) :
-            (
-                <LoginModal isOpen={this.state.isLoginModalOpen}
-                            onRequestClose={this.closeLoginModal}
-                            login={this.login}
-                            close={this.closeLoginModal} />
-            );
+            ) : '';
 
         return (
             <div className="group-list">
@@ -163,7 +156,7 @@ class GroupList extends React.Component{
                 isDetailsModalOpen: true
             })
         } else {
-            this.openLoginModal();
+            this.props.openLoginModal();
         }
     }
 

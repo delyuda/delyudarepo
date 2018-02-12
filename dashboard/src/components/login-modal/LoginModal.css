@@ -1,3 +1,36 @@
 .cancel-btn {
     float: right;
 }
+
+.login-title {
+    font-size: 24px;
+    text-align: center;
+}
+
+.wrong-message {
+    color: #ff0000;
+    margin: 10px auto;
+}
+
+.loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading__message {
+    font-size: 36px;
+    font-weight: bold;
+    color: #222;
+    margin: 20px 0 30px;
+}
+
+.loading__icon {
+    font-size: 48px;
+}
+
+.login-info {
+    font-style: italic;
+    margin: 10px 0;
+}

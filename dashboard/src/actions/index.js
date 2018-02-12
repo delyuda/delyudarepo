@@ -91,3 +91,49 @@ export const updateTask = ({id, title, description, date}) => {
         date
     }
 };
+
+
+const mockAuthResponse = {
+    userName: 'Bruce Wayne',
+    authState: true
+};
+
+const mockAuthFailResponse = {
+    userName: '',
+    authState: false
+};
+
+export function login (params) {
+    return dispatch => {
+        dispatch({
+            type: 'AUTH_REQUESTED'
+        });
+
+        let response = (params.email === 'batman@gmail.com' && params.password === 'batman') ?
+            mockAuthResponse : mockAuthFailResponse;
+
+        setTimeout(() => {
+            dispatch({
+                type: 'AUTH_OK',
+                response: response
+            });
+        }, 2000);
+    }
+}
+
+export function logout () {
+    return dispatch => {
+        dispatch({
+            type: 'LOGOUT_REQUESTED'
+        });
+
+        setTimeout(() => {
+            dispatch({
+                type: 'LOGOUT_OK',
+                response: {
+                    authState: false
+                }
+            });
+        }, 500);
+    }
+}

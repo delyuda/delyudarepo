@@ -3,3 +3,12 @@
     justify-content: flex-end;
     padding: 10px;
 }
+
+.user-info {
+    margin: 5px 15px;
+}
+
+.user-info__name {
+    font-weight: bold;
+    margin-left: 5px;
+}
