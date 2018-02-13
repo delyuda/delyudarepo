@@ -16,6 +16,7 @@ class GroupList extends React.Component{
             groupTitle: '',
             groupId: null,
             isGroupUpdate: false,
+            isTitleError: false,
             isDetailsModalOpen: false,
             details: {
                 title: '',
@@ -70,18 +71,25 @@ class GroupList extends React.Component{
                            style={{
                                content: {
                                    width: '350px',
-                                   height: '200px',
+                                   height: '230px',
                                    margin: 'auto auto',
                                    padding: '40px 10px 0'
                                }
                            }}>
                         <div className="new-group-title">Add new group</div>
-                        <div className="form-group">
+                        <div className={`form-group ${(this.state.isTitleError) ? 'has-error' : '' }`}>
                             <label htmlFor="group-name">Group Title: </label>
                             <input type='text' id="group-name" className="form-control"
                                    value={this.state.groupTitle}
                                    onChange={this.groupInputChange} />
                         </div>
+                        {
+                            (this.state.isTitleError) ?
+                                <div className="error-message">
+                                    Field cannot be empty
+                                </div>
+                                : ''
+                        }
                         <div className="btn-toolbar">
                             {this.state.isGroupUpdate ?
                                 <button className="btn btn-success" onClick={this.updateGroup}>
@@ -127,7 +135,8 @@ class GroupList extends React.Component{
             isModalOpen: false,
             groupTitle: '',
             isGroupUpdate: false,
-            groupId: null
+            groupId: null,
+            isTitleError: false
         });
     }
 
@@ -138,6 +147,12 @@ class GroupList extends React.Component{
     }
 
     addGroup () {
+        if (!this.state.groupTitle.trim().length) {
+            this.showTitleError();
+
+            return;
+        }
+
         this.props.addGroup({
             title: this.state.groupTitle
         });
@@ -192,12 +207,24 @@ class GroupList extends React.Component{
     }
 
     updateGroup () {
+        if (!this.state.groupTitle.trim().length) {
+            this.showTitleError();
+
+            return;
+        }
+
         this.props.updateGroup({
             title: this.state.groupTitle,
             id: this.state.groupId
         });
 
         this.closeModal();
+    }
+
+    showTitleError () {
+        this.setState({
+            isTitleError: true
+        });
     }
 }
 

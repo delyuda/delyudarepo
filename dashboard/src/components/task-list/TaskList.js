@@ -14,7 +14,9 @@ class TaskList extends React.Component{
             taskTitle: '',
             taskDescription: '',
             taskDate: '',
-            taskId: null
+            taskId: null,
+            isTitleError: false,
+            isDescrError: false
         };
 
         this.openModal = this.openModal.bind(this);
@@ -51,23 +53,30 @@ class TaskList extends React.Component{
                            style={{
                                content: {
                                    width: '450px',
-                                   height: '360px',
+                                   height: '395px',
                                    margin: 'auto auto',
-                                   padding: '40px 10px 0'
+                                   padding: '10px'
                                }
                            }}>
                         <div className="new-task-header">
                             Add New Task
                         </div>
-                        <div className="from-group">
+                        <div className={`form-group ${(this.state.isTitleError) ? 'has-error' : '' }`}>
                             <label htmlFor="task-title">
                                 Title
                             </label>
                             <input type="text" id="task-title" className="form-control"
                                    value={this.state.taskTitle}
                                 onChange={this.onChangeTask} />
+                            {
+                                (this.state.isTitleError) ?
+                                    <div className="error-message">
+                                        Field cannot be empty
+                                    </div>
+                                    : ''
+                            }
                         </div>
-                        <div className="from-group">
+                        <div className={`form-group ${(this.state.isDescrError) ? 'has-error' : '' }`}>
                             <label htmlFor="task-descr">
                                 Description:
                             </label>
@@ -76,6 +85,13 @@ class TaskList extends React.Component{
                                       onChange={this.onChangeDescription}>
                                 Description here
                             </textarea>
+                            {
+                                (this.state.isDescrError) ?
+                                    <div className="error-message">
+                                        Field cannot be empty
+                                    </div>
+                                    : ''
+                            }
                         </div>
                         <div className="from-group">
                             <label htmlFor="task-date">
@@ -129,7 +145,9 @@ class TaskList extends React.Component{
             taskTitle: '',
             taskDescription: '',
             taskDate: '',
-            taskId: null
+            taskId: null,
+            isTitleError: false,
+            isDescrError: false
         });
     }
 
@@ -152,6 +170,10 @@ class TaskList extends React.Component{
     }
 
     addTaskHandler () {
+        if (!this.isValid()) {
+            return;
+        }
+
         this.props.addTask({
             groupId: this.props.groupId,
             title: this.state.taskTitle,
@@ -173,6 +195,10 @@ class TaskList extends React.Component{
     }
 
     updateTask () {
+        if (!this.isValid()) {
+            return;
+        }
+
         this.props.updateTask({
             id: this.state.taskId,
             title: this.state.taskTitle,
@@ -181,6 +207,26 @@ class TaskList extends React.Component{
         });
 
         this.closeModal();
+    }
+
+    isValid () {
+        let isTitleEmpty = !this.state.taskTitle.trim().length;
+        let isDescrEmpty = !this.state.taskDescription.trim().length;
+
+        if (isTitleEmpty || isDescrEmpty) {
+            if (isTitleEmpty)  this.showError('Title');
+            if (isDescrEmpty)  this.showError('Descr');
+
+            return false;
+        }
+
+        return true;
+    }
+
+    showError (item) {
+        this.setState({
+            ['is' + item + 'Error']: true
+        });
     }
 }
 

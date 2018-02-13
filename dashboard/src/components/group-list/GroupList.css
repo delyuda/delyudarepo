@@ -27,3 +27,8 @@
     font-weight: bold;
     margin: 0 0 10px;
 }
+
+.error-message {
+    color: #ff0000;
+    font-size: 13px;
+}
